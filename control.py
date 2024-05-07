@@ -16,9 +16,9 @@ def check():
         return json.dumps(return_dict, ensure_ascii=False)
     # 获取传入的params参数
     get_data=request.args.to_dict()
-    command=get_data.get('command')
+    command_list=get_data.get('command_list')
     # 对参数进行操作
-    print(command)
+    print(command_list)
     out = subprocess.getoutput(command)
     return_dict['out'] = out
     return json.dumps(return_dict, ensure_ascii=False)
