@@ -13,15 +13,17 @@ def check():
     if request.args is None:
         return_dict['return_code'] = '5004'
         return_dict['return_info'] = '请求参数为空'
+        print(return_dict)
         return json.dumps(return_dict, ensure_ascii=False)
     # 获取传入的params参数
     get_data=request.args.to_dict()
-    command_list = json.loads(get_data.get('command_list'))
+    command = get_data.get('command')
     # 对参数进行操作
-    print(command_list)
+    command_list = command.split(';')
     for command in command_list:
         out = subprocess.getoutput(command)
         return_dict[command] = out
+    print(return_dict)
     return json.dumps(return_dict, ensure_ascii=False)
  
 if __name__ == "__main__":
