@@ -19,8 +19,9 @@ def check():
     command_list=get_data.get('command_list')
     # 对参数进行操作
     print(command_list)
-    out = subprocess.getoutput(command)
-    return_dict['out'] = out
+    for command in command_list:
+        out = subprocess.getoutput(command)
+        return_dict[command] = out
     return json.dumps(return_dict, ensure_ascii=False)
  
 if __name__ == "__main__":
