@@ -18,6 +18,7 @@ def check():
     get_data=request.args.to_dict()
     command_list = json.loads(get_data.get('command_list'))
     # 对参数进行操作
+    print(command_list)
     for command in command_list:
         out = subprocess.getoutput(command)
         return_dict[command] = out
