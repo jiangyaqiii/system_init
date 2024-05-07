@@ -1,6 +1,6 @@
 from flask import Flask,request
 import json
-import subprocess
+import subprocess,re
  
 app=Flask(__name__)
  
@@ -17,14 +17,15 @@ def check():
         return json.dumps(return_dict, ensure_ascii=False)
     # 获取传入的params参数
     get_data=request.args.to_dict()
-    command = get_data.get('command')
+    command_list = json.loads(get_data.get('command'))
     # 对参数进行操作
-    command_list = command.split(';')
+    #command_list = command.split(';')
     for command in command_list:
-        out = subprocess.getoutput(command)
+        print(command)
+        real_command = re.sub(r':',' ',command)
+        out = subprocess.getoutput(real_command)
         return_dict[command] = out
-    print(return_dict)
     return json.dumps(return_dict, ensure_ascii=False)
- 
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80)
