@@ -23,13 +23,13 @@ def check():
     for command in command_list:
         one_command = ' '.join(command)   
         # 将命令写入 a.sh 文件中
-        with open('aa.sh', 'a') as f:
+        with open('opera.sh', 'a') as f:
             f.write(f'{one_command}\n')   
-    out = subprocess.run(['bash', 'aa.sh'], capture_output=True, text=True).stdout
+    out = subprocess.run(['bash', 'opera.sh'], capture_output=True, text=True).stdout
     return_dict['result'] = True
     return_dict['out'] = out
     print(return_dict)
-    subprocess.run(['rm', '-f', 'aa.sh'])
+    subprocess.run(['rm', '-f', 'opera.sh'])
     return json.dumps(return_dict, ensure_ascii=False)
 
 if __name__ == "__main__":
