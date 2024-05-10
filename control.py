@@ -13,18 +13,23 @@ def check():
     if request.args is None:
         return_dict['return_code'] = '5004'
         return_dict['return_info'] = '请求参数为空'
-        print(return_dict)
         return json.dumps(return_dict, ensure_ascii=False)
     # 获取传入的params参数
     get_data=request.args.to_dict()
     command_list = json.loads(get_data.get('command'))
     # 对参数进行操作
-    #command_list = command.split(';')
+    work_path = ''
     for command in command_list:
-        print(command)
-        real_command = re.sub(r':',' ',command)
-        out = subprocess.getoutput(real_command)
-        return_dict[command] = out
+        if command[0] == 'cd':
+            ##cd命令,改变工作路径
+            work_path = command[1]
+        else:
+            if work_path:
+                out = subprocess.run(command, shell=True, check=True, capture_output=True, text=True, cwd=work_path).stdout
+            else:
+                out = subprocess.run(command, shell=True, check=True, capture_output=True, text=True).stdout
+    return_dict['result'] = True
+    return_dict['out'] = out
     return json.dumps(return_dict, ensure_ascii=False)
 
 if __name__ == "__main__":
