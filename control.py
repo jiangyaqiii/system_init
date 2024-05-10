@@ -4,6 +4,7 @@ import subprocess,re
  
 app=Flask(__name__)
  
+
 # 只接受get方法访问
 @app.route("/command",methods=["GET"])
 def check():
@@ -20,17 +21,17 @@ def check():
     # 对参数进行操作
     work_path = ''
     for command in command_list:
-        if command[0] == 'cd':
-            ##cd命令,改变工作路径
-            work_path = command[1]
-        else:
-            if work_path:
-                out = subprocess.run(command, shell=True, check=True, capture_output=True, text=True, cwd=work_path).stdout
-            else:
-                out = subprocess.run(command, shell=True, check=True, capture_output=True, text=True).stdout
+        one_command = ' '.join(command)   
+        # 将命令写入 a.sh 文件中
+        with open('aa.sh', 'a') as f:
+            f.write(f'{one_command}\n')   
+    out = subprocess.run(['bash', 'aa.sh'], capture_output=True, text=True).stdout
     return_dict['result'] = True
     return_dict['out'] = out
+    print(return_dict)
+    subprocess.run(['rm', '-f', 'aa.sh'])
     return json.dumps(return_dict, ensure_ascii=False)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80)
+
