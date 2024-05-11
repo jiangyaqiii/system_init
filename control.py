@@ -28,7 +28,6 @@ def check():
     out = subprocess.run(['bash', 'opera.sh'], capture_output=True, text=True).stdout
     return_dict['result'] = True
     return_dict['out'] = out
-    print(return_dict)
     subprocess.run(['rm', '-f', 'opera.sh'])
     return json.dumps(return_dict, ensure_ascii=False)
 
