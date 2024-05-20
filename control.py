@@ -18,6 +18,13 @@ def check():
     # 获取传入的params参数
     get_data=request.args.to_dict()
     command_list = json.loads(get_data.get('command'))
+    try:
+        export_dict = json.loads(get_data.get('export_dict'))
+        for key in export_dict:
+            with open('opera.sh', 'a') as f:
+                f.write(f'export {key}={export_dict[key]}\n') 
+    except:
+        pass
     # 对参数进行操作
     work_path = ''
     for command in command_list:
@@ -33,4 +40,3 @@ def check():
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80)
-
