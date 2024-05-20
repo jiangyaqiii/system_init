@@ -1,9 +1,13 @@
 from flask import Flask,request
-import json
-import subprocess,re
+import json, requests
+import subprocess,re, traceback
  
 app=Flask(__name__)
  
+
+# def recv_command_respon():
+#     """运行完后，将结果返回"""
+
 
 # 只接受get方法访问
 @app.route("/command",methods=["GET"])
@@ -36,6 +40,14 @@ def check():
     return_dict['result'] = True
     return_dict['out'] = out
     subprocess.run(['rm', '-f', 'opera.sh'])
+    base_info = json.loads(get_data.get('base_info'))
+    if base_info['opera'] in ['启动服务', '重启服务']:
+        remote_addr = base_info['remote_addr']
+        url = f"http://{remote_addr}/admin/server_bot/recv_command_respon/"
+        body = {
+            'base_info':json.dumps(base_info),
+        }
+        requests.get(url, params=body)  # 发送请求
     return json.dumps(return_dict, ensure_ascii=False)
 
 if __name__ == "__main__":
