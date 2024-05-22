@@ -42,7 +42,7 @@ def check():
     out = subprocess.run(['bash', 'opera.sh'], capture_output=True, text=True).stdout
     return_dict['result'] = True
     return_dict['out'] = out
-    # subprocess.run(['rm', '-f', 'opera.sh'])
+    subprocess.run(['rm', '-f', 'opera.sh'])
     base_info = json.loads(get_data.get('base_info'))
     if base_info['opera'] in ['启动服务', '重启服务']:
         remote_addr = base_info['remote_addr']
