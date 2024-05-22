@@ -20,8 +20,7 @@ def check():
         return_dict['return_info'] = '请求参数为空'
         return json.dumps(return_dict, ensure_ascii=False)
     # 获取传入的params参数
-    # get_data=request.args.to_dict()
-    get_data=request.json
+    get_data = request.json if not request.args.to_dict() else request.args.to_dict()
     print(get_data)
     command_list = json.loads(get_data.get('command'))
     try:
@@ -35,7 +34,6 @@ def check():
     work_path = ''
     for command in command_list:
         one_command = ' '.join(command)   
-        print(one_command)
         # 将命令写入 a.sh 文件中
         with open('opera.sh', 'a') as f:
             f.write(f'{one_command}\n')   
