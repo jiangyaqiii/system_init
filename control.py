@@ -65,6 +65,7 @@ def start_send_log():
     get_data = request.json if not request.args.to_dict() else request.args.to_dict()
     command_list = json.loads(get_data.get('command'))
     log_obj.start_send_log(command_list, source_addr, 81) ##启动发送日志功能
+    return json.dumps({'return_code': '200'}, ensure_ascii=False)
 
 import socket
 class Log:
@@ -89,7 +90,14 @@ class Log:
 
 log_obj = Log()
 # 每隔5秒执行一次my_job()
-scheduler.add_job(log_obj.send_log, 'interval', seconds=5)
+
+# def test():
+#     out = 'asdadasdad'
+#     _socket.sendall((out+'///delimiter').encode())
+
+# _socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# _socket.connect(('45.130.21.54', 81))
+# scheduler.add_job(log_obj.send_log, 'interval', seconds=5)
 
 
 if __name__ == "__main__":
