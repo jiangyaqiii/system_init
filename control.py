@@ -67,6 +67,12 @@ def start_send_log():
     log_obj.start_send_log(command_list, source_addr, 81) ##启动发送日志功能
     return json.dumps({'return_code': '200'}, ensure_ascii=False)
 
+@app.route("/check_alive",methods=['GET'])
+def check_alive():
+    """检查控制面板活性"""
+    return json.dumps({'return_code': '200'}, ensure_ascii=False)
+
+
 import socket
 class Log:
     def __init__(self):
@@ -85,6 +91,7 @@ class Log:
         if self.status:
             print('开始发送日志')
             out = _opera_command(self.command_list)
+            print(self.command_list)
             self._socket.sendall((out+'///delimiter').encode())
 
 
@@ -97,7 +104,7 @@ log_obj = Log()
 
 # _socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # _socket.connect(('45.130.21.54', 81))
-# scheduler.add_job(log_obj.send_log, 'interval', seconds=5)
+scheduler.add_job(log_obj.send_log, 'interval', seconds=1)
 
 
 if __name__ == "__main__":
