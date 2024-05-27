@@ -1,5 +1,7 @@
 #!/bin/bash
 cd ~/system_init
+git checkout -- control.py
+git checkout -- init.sh
 git pull
 
 ##杀死此服务
