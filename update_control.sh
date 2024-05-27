@@ -38,3 +38,5 @@ then
 else
     echo "kill "$port" port services fail!"
 fi
+
+rm -f update_control.sh
