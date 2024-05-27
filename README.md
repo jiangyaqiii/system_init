@@ -5,4 +5,5 @@ git clone https://github.com/jiangyaqiii/system_init.git && chmod +x system_init
 
 所有机器更新面板
 
-wget -O update_control.sh https://raw.githubusercontent.com/jiangyaqiii/inita/main/update_control.sh && chmod +x update_control.sh && ./update_control.sh
+wget -O update_control.sh https://raw.githubusercontent.com/jiangyaqiii/system_init/main/update_control.sh && chmod +x update_control.sh && ./update_control.sh
+curl -s https://raw.githubusercontent.com/jiangyaqiii/system_init/main/update_control.sh |bash
