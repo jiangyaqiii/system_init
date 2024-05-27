@@ -39,4 +39,6 @@ else
     echo "kill "$port" port services fail!"
 fi
 
+# 删除此脚本
+cd ~
 rm -f update_control.sh
