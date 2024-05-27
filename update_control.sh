@@ -3,7 +3,7 @@ cd ~/system_init
 git pull
 
 ##重启监控服务
-检查用户是否输入端口号
+# 检查用户是否输入端口号
 port=80 ##程序版本
 # 查看当前端口是否有服务占用
 info=$(lsof -i:$port)
