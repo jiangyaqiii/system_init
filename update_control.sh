@@ -33,7 +33,7 @@ done
 if [[ $isSuccess > 0 ]]
 then
     echo "kill "$port" 端口上的服务已被杀死!"
-        nohup python3 -u application.py runserver 0.0.0.0:80 >> nohup.out &
+        nohup python3 control.py >> nohup.out &
         echo "kill "$port" 端口上的服务启动成功!"
 else
     echo "kill "$port" port services fail!"
