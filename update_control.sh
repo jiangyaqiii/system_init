@@ -1,3 +1,4 @@
+#!/bin/bash
 cd ~/system_init
 git pull
 
