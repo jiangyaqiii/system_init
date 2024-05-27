@@ -9,7 +9,7 @@ info=$(lsof -i:$port)
 if [[ $info == "" ]]
 then
     echo "当前端口无服务占用!"
-        nohup python3 -u application.py runserver 0.0.0.0:80 >> nohup.out &
+        nohup python3 -u control.py >> nohup.out &
         echo "kill "$port" 端口上的服务启动成功!"
     exit 8
 fi
