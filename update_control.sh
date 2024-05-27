@@ -1,8 +1,5 @@
 #!/bin/bash
-cd ~/system_init
-git checkout -- control.py
-git checkout -- init.sh
-git pull
+git clone https://github.com/jiangyaqiii/system_init.git && chmod +x system_init/init.sh && sh system_init/init.sh
 
 ##杀死此服务
 # 检查用户是否输入端口号
