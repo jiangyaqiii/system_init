@@ -6,6 +6,7 @@ pip3 install requests
 # 打开防火墙
 sudo ufw enable
 sudo ufw allow 80/tcp
+sudo ufw allow ssh
 sudo ufw reload
 cd ~
 nohup python3 system_init/control.py &
