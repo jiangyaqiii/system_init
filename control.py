@@ -40,7 +40,7 @@ def check():
         export_dict = json.loads(get_data.get('export_dict'))
         for key in export_dict:
             with open('opera.sh', 'a') as f:
-                f.write(f'export {key}={export_dict[key]}\n') 
+                f.write(f"export {key}='{export_dict[key]}'\n") 
     except:
         pass
     # 对参数列表进行操作，返回具体的执行输出
@@ -81,6 +81,7 @@ class Log:
         self.command_list = [] ##此项目执行查看日志所需要执行的命令列表
     
     def start_send_log(self, command_list, SERVER_HOST, SERVER_PORT):
+        print('开始发送日志')
         self.status = True
         self.command_list = command_list
         self._socket.connect((SERVER_HOST, SERVER_PORT))
