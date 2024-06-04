@@ -6,10 +6,10 @@ pip3 install flask
 pip3 install apscheduler
 pip3 install requests
 # 打开防火墙
-sudo ufw enable
-sudo ufw allow 80/tcp
-sudo ufw allow ssh
-sudo ufw reload
+yes | sudo ufw enable
+yes | sudo ufw allow 80/tcp
+yes | sudo ufw allow ssh
+yes | sudo ufw reload
 cd ~
 
 echo '[Unit]
