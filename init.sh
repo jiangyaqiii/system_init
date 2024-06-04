@@ -18,12 +18,13 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=python3 /root/system_init/control.py
+ExecStart=nohup python3 /root/system_init/control.py &
 Restart=always
 
 [Install]
 WantedBy=multi-user.target'> /etc/systemd/system/control.service
+sudo systemctl enable control.service
+sudo systemctl start control.service
 
 
 
-nohup python3 system_init/control.py &
